@@ -1,0 +1,4 @@
+# for Tang-Nano 1st gen rev 2704
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", ATTR{manufacturer}=="Kongou Hikari", ATTR{product}=="Sipeed-Debug", GROUP="plugdev", MODE="0666", PROGRAM="/opt/bin/usb_unbind.sh %p"
+# for Tang-Nano 4k and Tang-Nano 9k
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", ATTR{manufacturer}=="SIPEED", ATTR{product}=="JTAG Debugger", GROUP="plugdev", MODE="0666", PROGRAM="/opt/bin/usb_unbind.sh %p"

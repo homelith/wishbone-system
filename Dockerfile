@@ -5,13 +5,19 @@ ENV FILE_DIR=docker
 
 # useful pkg for development
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y git locales make rsync screen sudo tmux tzdata usbutils vim wget x11-apps xorg xterm && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential git locales make rsync screen sudo tmux tzdata usbutils vim wget x11-apps xorg xterm && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # required pkg for running gowin ide
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y libglib2.0-0 libfontconfig1 kmod && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# required pkg for simulation
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y iverilog gtkwave && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

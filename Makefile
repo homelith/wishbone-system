@@ -29,14 +29,10 @@ default: docker
 # get gowin tools introduced shell on a container
 # VendorID / ProductID :
 #   0403:6010 = FT2232C/D/H Dual UART/FIFO IC (Tang-Nano rev. 2704 (first-gen) and Tang-Nano 9K)
-# for WSL2 environment :
-#   sudo chmod 666 /dev/bus/usb/{}/{}
-#   sudo bash -c "echo -n {}:{} > /sys/bus/usb/drivers/ftdi_sio/unbind"
-#   sudo bash -c "echo -n {}:{} > /sys/bus/usb/drivers/ftdi_sio/unbind"
 docker:
 	@if !(type docker > /dev/null 2>&1); then echo "command 'docker' not found." ; exit 1 ; fi
 	@if [ $(BUILD_REQUIRED) -eq 1 ]; then time docker build --no-cache -t $(IMAGE_NAME):$(IMAGE_TAG) . ; fi
-	docker run --rm --net host -it -w $(SCRIPT_DIR) \
+	docker run --rm --net host -it --init -w $(SCRIPT_DIR) \
 		-v $(SCRIPT_DIR)/$(PROJ_ROOT)/:$(SCRIPT_DIR)/$(PROJ_ROOT)/ \
 		-v /opt:/opt -e USER_ID=`id -u` -e GROUP_ID=`id -g` \
 		$(shell if [ -n "`lsusb -d 0403:6010`" ] ; then echo "--device `lsusb -d 0403:6010`" | perl -pe 's!Bus\s(\d{3})\sDevice\s(\d{3}).*!/dev/bus/usb/\1/\2!' ; fi) \

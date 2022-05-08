@@ -3,7 +3,11 @@ GOWIN_TOOL_VERSION=1.9.8
 GOWIN_ROOT_DIR=/opt/Gowin
 
 export QT_X11_NO_MITSHM=1
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GOWIN_ROOT_DIR}/${GOWIN_TOOL_VERSION}/IDE/lib
+if [ -z ${LD_LIBRARY_PATH} ]; then
+	export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:${GOWIN_ROOT_DIR}/${GOWIN_TOOL_VERSION}/IDE/lib
+else
+	export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib/x86_64-linux-gnu:${GOWIN_ROOT_DIR}/${GOWIN_TOOL_VERSION}/IDE/lib
+fi
 export PATH=${PATH}:${GOWIN_ROOT_DIR}/${GOWIN_TOOL_VERSION}/IDE/bin
 export PATH=${PATH}:${GOWIN_ROOT_DIR}/${GOWIN_TOOL_VERSION}/Programmer/bin
 echo "---- gowin-tools:${GOWIN_TOOL_VERSION} container shell ----"
