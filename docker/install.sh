@@ -10,6 +10,7 @@ INSTALLER_ARCHIVE=Gowin_V1.9.8_linux.tar.gz
 # check if installer file and download it
 if [ ! -f ${INSTALLER_DIR}/${INSTALLER_ARCHIVE} ]; then
     echo "no '${INSTALLER_DIR}/${INSTALLER_ARCHIVE}' found, downloading from gowin official..."
+    sudo mkdir -p ${INSTALLER_DIR}
     sudo wget -O ${INSTALLER_DIR}/${INSTALLER_ARCHIVE} ${INSTALLER_DOWNLOAD_URI}
 else
     echo "use existing '${INSTALLER_DIR}/${INSTALLER_ARCHIVE}'"
